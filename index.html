@@ -1,1 +1,23 @@
-<iframe width="100%" height="100%" src="https://short.ink/KPUUYFSL3_" frameborder="0" scrolling="0" allowfullscreen></iframe>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+            <title>HYDRAX PLAYER</title>
+            <script type="text/javascript">
+				window.onload=function(){//document.getElementById("video").style.display="none";};
+				function DisplayVideo(){
+					var x = document.getElementById("inputText").value;
+					document.getElementById("video").innerHTML="<iframe width=\"960px\" height=\"540px\" src=\"https://short.ink/"+x+"\" frameborder=\"0\" scrolling=\"0\" allowfullscreen></iframe>";
+				}
+            </script>
+        </head>
+        <body>
+            <div style="text-align:center;">
+                <input style="width:200px; height:40px;margin: auto" id="inputText" type="text" name="inputText" value="" placeholder="输入视频Slug" />
+                <p>
+                    <button type="button" onclick="DisplayVideo()">搜索视频</button>
+                </p>
+            </div>
+            <div id="video"  style="width:960px; height:540px;margin: auto"></div>
+        </body>
+    </html>
