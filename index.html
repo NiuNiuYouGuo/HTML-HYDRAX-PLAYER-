@@ -18,6 +18,25 @@
 								console.error('Service Worker registration failed:', error);
 							});
 					}
+					// 重写弹窗方法
+				        function blockPopups() {
+				            window.alert = function() {
+				                console.log('Blocked alert');
+				            };
+				            window.confirm = function() {
+				                console.log('Blocked confirm');
+				                return false;
+				            };
+				            window.prompt = function() {
+				                console.log('Blocked prompt');
+				                return null;
+				            };
+				        }
+			
+				        // 在页面加载完成后调用
+				        window.onload = function() {
+				            blockPopups();
+				        };
 					// 假设URL是 http://example.com/?key=9999
 					let queryString = window.location.search;
 					let urlParams = new URLSearchParams(queryString);					
