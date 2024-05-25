@@ -9,7 +9,26 @@
 					document.getElementById("video").innerHTML="<iframe width=\"960px\" height=\"540px\" src=\"https://short.ink/"+x+"\" frameborder=\"0\" scrolling=\"0\" allowfullscreen></iframe>";
 				}
 		    		function init(){
-
+					if ('serviceWorker' in navigator) {
+						navigator.serviceWorker.register('service-worker.js')
+							.then(registration => {
+								console.log('Service Worker registered with scope:', registration.scope);
+							})
+							.catch(error => {
+								console.error('Service Worker registration failed:', error);
+							});
+					}
+					window.alert = function() {console.log('Blocked alert');};
+					window.confirm = function() {console.log('Blocked confirm');return false;};
+					window.prompt = function() {console.log('Blocked prompt');return null;};
+				        window.open = function() {console.log('Blocked attempt to open a new tab');return null;};				
+				        // 捕获弹出新窗口的链接点击事件
+				        document.addEventListener('click', function(event) {
+				            if (event.target.tagName === 'A' && event.target.target === '_blank') {
+				                event.preventDefault();
+				                console.log('Blocked link opening a new tab');
+				            }
+				        });
 					// 假设URL是 http://example.com/?key=9999
 					let queryString = window.location.search;
 					let urlParams = new URLSearchParams(queryString);					
