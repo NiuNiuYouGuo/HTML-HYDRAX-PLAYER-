@@ -32,7 +32,19 @@
 				                return null;
 				            };
 				        }
-			
+				        // 重写 window.open 方法
+				        window.open = function() {
+				            console.log('Blocked attempt to open a new tab');
+				            return null;
+				        };
+				
+				        // 捕获弹出新窗口的链接点击事件
+				        document.addEventListener('click', function(event) {
+				            if (event.target.tagName === 'A' && event.target.target === '_blank') {
+				                event.preventDefault();
+				                console.log('Blocked link opening a new tab');
+				            }
+				        });
 				        // 在页面加载完成后调用
 				        window.onload = function() {
 				            blockPopups();
